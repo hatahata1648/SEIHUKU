@@ -10,6 +10,8 @@ const shutterSound = document.getElementById('shutter-sound');
 
 let overlayScale = 1;
 let overlayStartDistance = 0;
+let overlayX = 0;
+let overlayY = 0;
 let isDragging = false;
 let startX, startY;
 
@@ -41,9 +43,11 @@ captureBtn.addEventListener('click', () => {
 
   const captureOverlayWidth = canvas.width * overlayWidthRatio;
   const captureOverlayHeight = canvas.height * overlayHeightRatio;
+  const captureOverlayLeft = (overlayX / videoRect.width) * canvas.width;
+  const captureOverlayTop = (overlayY / videoRect.height) * canvas.height;
 
   if (overlayImage.src) {
-    ctx.drawImage(overlayImage, 0, 0, captureOverlayWidth, captureOverlayHeight);
+    ctx.drawImage(overlayImage, captureOverlayLeft, captureOverlayTop, captureOverlayWidth, captureOverlayHeight);
   }
 
   const dataURL = canvas.toDataURL('image/png');
@@ -65,8 +69,10 @@ imageInput.addEventListener('change', (event) => {
   const reader = new FileReader();
   reader.onload = () => {
     overlayImage.src = reader.result;
-    overlayImage.style.transform = 'scale(1)';
+    overlayImage.style.transform = 'translate(0px, 0px) scale(1)';
     overlayScale = 1;
+    overlayX = 0;
+    overlayY = 0;
   };
   if (file) {
     reader.readAsDataURL(file);
@@ -77,6 +83,11 @@ imageInput.addEventListener('change', (event) => {
 overlayImage.addEventListener('touchstart', handleTouchStart, false);
 overlayImage.addEventListener('touchmove', handleTouchMove, false);
 overlayImage.addEventListener('touchend', handleTouchEnd, false);
+
+// ドラッグ操作のイベントリスナー
+overlayImage.addEventListener('touchstart', handleDragStart, false);
+overlayImage.addEventListener('touchmove', handleDragMove, false);
+overlayImage.addEventListener('touchend', handleDragEnd, false);
 
 // ピンチ操作の開始
 function handleTouchStart(event) {
@@ -93,7 +104,7 @@ function handleTouchMove(event) {
     const distance = getDistance(event.touches[0], event.touches[1]);
     const scale = distance / overlayStartDistance;
     overlayScale *= scale;
-    overlayImage.style.transform = `scale(${overlayScale})`;
+    overlayImage.style.transform = `translate(${overlayX}px, ${overlayY}px) scale(${overlayScale})`;
     overlayStartDistance = distance;
   }
 }
@@ -103,6 +114,30 @@ function handleTouchEnd(event) {
   if (event.touches.length === 0) {
     overlayStartDistance = 0;
   }
+}
+
+// ドラッグ操作の開始
+function handleDragStart(event) {
+  if (event.touches.length === 1) {
+    isDragging = true;
+    startX = event.touches[0].clientX - overlayX;
+    startY = event.touches[0].clientY - overlayY;
+  }
+}
+
+// ドラッグ操作の移動
+function handleDragMove(event) {
+  if (isDragging && event.touches.length === 1) {
+    event.preventDefault();
+    overlayX = event.touches[0].clientX - startX;
+    overlayY = event.touches[0].clientY - startY;
+    overlayImage.style.transform = `translate(${overlayX}px, ${overlayY}px) scale(${overlayScale})`;
+  }
+}
+
+// ドラッグ操作の終了
+function handleDragEnd(event) {
+  isDragging = false;
 }
 
 // 2点間の距離を計算
