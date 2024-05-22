@@ -33,8 +33,8 @@ navigator.mediaDevices.getUserMedia(constraints)
 // 写真の撮影と保存
 captureBtn.addEventListener('click', () => {
   const videoRatio = video.videoWidth / video.videoHeight;
-  const canvasWidth = video.videoWidth;
-  const canvasHeight = canvasWidth / videoRatio;
+  const canvasWidth = window.innerWidth;
+  const canvasHeight = window.innerHeight;
   canvas.width = canvasWidth;
   canvas.height = canvasHeight;
   const ctx = canvas.getContext('2d');
