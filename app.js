@@ -40,8 +40,8 @@ captureBtn.addEventListener('click', () => {
   const overlayRect = overlayImage.getBoundingClientRect();
   const overlayWidthRatio = overlayRect.width / videoRect.width;
   const overlayHeightRatio = overlayRect.height / videoRect.height;
-  const overlayLeftRatio = overlayRect.left / videoRect.width;
-  const overlayTopRatio = overlayRect.top / videoRect.height;
+  const overlayLeftRatio = (overlayRect.left - videoRect.left) / videoRect.width;
+  const overlayTopRatio = (overlayRect.top - videoRect.top) / videoRect.height;
 
   const captureOverlayWidth = canvas.width * overlayWidthRatio;
   const captureOverlayHeight = canvas.height * overlayHeightRatio;
