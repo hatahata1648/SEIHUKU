@@ -10,8 +10,6 @@ const shutterSound = document.getElementById('shutter-sound');
 
 let overlayScale = 1;
 let overlayStartDistance = 0;
-let overlayX = 0;
-let overlayY = 0;
 let isDragging = false;
 let startX, startY;
 
@@ -29,31 +27,25 @@ navigator.mediaDevices.getUserMedia(constraints)
   })
   .catch(err => console.error(err));
 
-// ビデオのメタデータが読み込まれたら、キャンバスのサイズを設定
-video.addEventListener('loadedmetadata', () => {
-  const videoRatio = video.videoWidth / video.videoHeight;
-  const containerWidth = document.getElementById('video-container').clientWidth;
-  const containerHeight = document.getElementById('video-container').clientHeight;
-  const containerRatio = containerWidth / containerHeight;
-
-  if (videoRatio > containerRatio) {
-    canvas.width = containerWidth;
-    canvas.height = containerWidth / videoRatio;
-  } else {
-    canvas.width = containerHeight * videoRatio;
-    canvas.height = containerHeight;
-  }
-});
-
 // 写真の撮影
 captureBtn.addEventListener('click', () => {
+  canvas.width = video.videoWidth;
+  canvas.height = video.videoHeight;
   const ctx = canvas.getContext('2d');
   ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+  
+  const videoRect = video.getBoundingClientRect();
+  const overlayRect = overlayImage.getBoundingClientRect();
+  const overlayWidthRatio = overlayRect.width / videoRect.width;
+  const overlayHeightRatio = overlayRect.height / videoRect.height;
+
+  const captureOverlayWidth = canvas.width * overlayWidthRatio;
+  const captureOverlayHeight = canvas.height * overlayHeightRatio;
+
   if (overlayImage.src) {
-    const overlayWidth = canvas.width * overlayScale;
-    const overlayHeight = overlayWidth * (overlayImage.height / overlayImage.width);
-    ctx.drawImage(overlayImage, overlayX, overlayY, overlayWidth, overlayHeight);
+    ctx.drawImage(overlayImage, 0, 0, captureOverlayWidth, captureOverlayHeight);
   }
+
   const dataURL = canvas.toDataURL('image/png');
   capturedImage.src = dataURL;
   capturedImage.style.width = '100%';
@@ -73,10 +65,8 @@ imageInput.addEventListener('change', (event) => {
   const reader = new FileReader();
   reader.onload = () => {
     overlayImage.src = reader.result;
-    overlayImage.style.transform = 'translate(0px, 0px) scale(1)';
+    overlayImage.style.transform = 'scale(1)';
     overlayScale = 1;
-    overlayX = 0;
-    overlayY = 0;
   };
   if (file) {
     reader.readAsDataURL(file);
@@ -87,11 +77,6 @@ imageInput.addEventListener('change', (event) => {
 overlayImage.addEventListener('touchstart', handleTouchStart, false);
 overlayImage.addEventListener('touchmove', handleTouchMove, false);
 overlayImage.addEventListener('touchend', handleTouchEnd, false);
-
-// ドラッグ操作のイベントリスナー
-overlayImage.addEventListener('touchstart', handleDragStart, false);
-overlayImage.addEventListener('touchmove', handleDragMove, false);
-overlayImage.addEventListener('touchend', handleDragEnd, false);
 
 // ピンチ操作の開始
 function handleTouchStart(event) {
@@ -108,7 +93,7 @@ function handleTouchMove(event) {
     const distance = getDistance(event.touches[0], event.touches[1]);
     const scale = distance / overlayStartDistance;
     overlayScale *= scale;
-    overlayImage.style.transform = `translate(${overlayX}px, ${overlayY}px) scale(${overlayScale})`;
+    overlayImage.style.transform = `scale(${overlayScale})`;
     overlayStartDistance = distance;
   }
 }
@@ -118,30 +103,6 @@ function handleTouchEnd(event) {
   if (event.touches.length === 0) {
     overlayStartDistance = 0;
   }
-}
-
-// ドラッグ操作の開始
-function handleDragStart(event) {
-  if (event.touches.length === 1) {
-    isDragging = true;
-    startX = event.touches[0].clientX - overlayX;
-    startY = event.touches[0].clientY - overlayY;
-  }
-}
-
-// ドラッグ操作の移動
-function handleDragMove(event) {
-  if (isDragging && event.touches.length === 1) {
-    event.preventDefault();
-    overlayX = event.touches[0].clientX - startX;
-    overlayY = event.touches[0].clientY - startY;
-    overlayImage.style.transform = `translate(${overlayX}px, ${overlayY}px) scale(${overlayScale})`;
-  }
-}
-
-// ドラッグ操作の終了
-function handleDragEnd(event) {
-  isDragging = false;
 }
 
 // 2点間の距離を計算
