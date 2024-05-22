@@ -5,7 +5,6 @@ const captureBtn = document.getElementById('capture-btn');
 const previewContainer = document.getElementById('preview-container');
 const capturedImage = document.getElementById('captured-image');
 const closeBtn = document.getElementById('close-btn');
-const downloadLink = document.getElementById('download-link');
 const imageInput = document.getElementById('image-input');
 const shutterSound = document.getElementById('shutter-sound');
 
@@ -30,11 +29,11 @@ navigator.mediaDevices.getUserMedia(constraints)
   })
   .catch(err => console.error(err));
 
-// 写真の撮影と保存
+// 写真の撮影
 captureBtn.addEventListener('click', () => {
   const videoRatio = video.videoWidth / video.videoHeight;
-  const canvasWidth = window.innerWidth;
-  const canvasHeight = window.innerHeight;
+  const canvasWidth = video.videoWidth;
+  const canvasHeight = video.videoHeight;
   canvas.width = canvasWidth;
   canvas.height = canvasHeight;
   const ctx = canvas.getContext('2d');
@@ -45,17 +44,7 @@ captureBtn.addEventListener('click', () => {
   const dataURL = canvas.toDataURL('image/png');
   capturedImage.src = dataURL;
   previewContainer.style.display = 'flex';
-  downloadLink.href = dataURL;
-  downloadLink.style.display = 'block';
   shutterSound.play();
-  const previewOverlay = document.getElementById('preview-overlay');
-  previewOverlay.style.animation = 'none';
-  requestAnimationFrame(() => {
-    previewOverlay.style.animation = null;
-  });
-  requestAnimationFrame(() => {
-    previewOverlay.style.animation = 'flash 0.5s ease-out';
-  });
 });
 
 // プレビューを閉じる
