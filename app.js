@@ -29,20 +29,35 @@ navigator.mediaDevices.getUserMedia(constraints)
   })
   .catch(err => console.error(err));
 
+// ビデオのメタデータが読み込まれたら、キャンバスのサイズを設定
+video.addEventListener('loadedmetadata', () => {
+  const videoRatio = video.videoWidth / video.videoHeight;
+  const containerWidth = document.getElementById('video-container').clientWidth;
+  const containerHeight = document.getElementById('video-container').clientHeight;
+  const containerRatio = containerWidth / containerHeight;
+
+  if (videoRatio > containerRatio) {
+    canvas.width = containerWidth;
+    canvas.height = containerWidth / videoRatio;
+  } else {
+    canvas.width = containerHeight * videoRatio;
+    canvas.height = containerHeight;
+  }
+});
+
 // 写真の撮影
 captureBtn.addEventListener('click', () => {
-  const videoRatio = video.videoWidth / video.videoHeight;
-  const canvasWidth = video.videoWidth;
-  const canvasHeight = video.videoHeight;
-  canvas.width = canvasWidth;
-  canvas.height = canvasHeight;
   const ctx = canvas.getContext('2d');
-  ctx.drawImage(video, 0, 0, canvasWidth, canvasHeight);
+  ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
   if (overlayImage.src) {
-    ctx.drawImage(overlayImage, overlayX, overlayY, canvasWidth * overlayScale, canvasHeight * overlayScale);
+    const overlayWidth = canvas.width * overlayScale;
+    const overlayHeight = overlayWidth * (overlayImage.height / overlayImage.width);
+    ctx.drawImage(overlayImage, overlayX, overlayY, overlayWidth, overlayHeight);
   }
   const dataURL = canvas.toDataURL('image/png');
   capturedImage.src = dataURL;
+  capturedImage.style.width = '100%';
+  capturedImage.style.height = 'auto';
   previewContainer.style.display = 'flex';
   shutterSound.play();
 });
