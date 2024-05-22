@@ -40,12 +40,16 @@ captureBtn.addEventListener('click', () => {
   const overlayRect = overlayImage.getBoundingClientRect();
   const overlayWidthRatio = overlayRect.width / videoRect.width;
   const overlayHeightRatio = overlayRect.height / videoRect.height;
+  const overlayLeftRatio = overlayRect.left / videoRect.width;
+  const overlayTopRatio = overlayRect.top / videoRect.height;
 
   const captureOverlayWidth = canvas.width * overlayWidthRatio;
   const captureOverlayHeight = canvas.height * overlayHeightRatio;
+  const captureOverlayLeft = canvas.width * overlayLeftRatio;
+  const captureOverlayTop = canvas.height * overlayTopRatio;
 
   if (overlayImage.src) {
-    ctx.drawImage(overlayImage, 0, 0, captureOverlayWidth, captureOverlayHeight);
+    ctx.drawImage(overlayImage, captureOverlayLeft, captureOverlayTop, captureOverlayWidth, captureOverlayHeight);
   }
 
   const dataURL = canvas.toDataURL('image/png');
