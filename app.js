@@ -8,6 +8,7 @@ const closeBtn = document.getElementById('close-btn');
 const imageInput = document.getElementById('image-input');
 const shutterSound = document.getElementById('shutter-sound');
 const closeTabBtn = document.getElementById('close-tab');
+const rotateOverlayBtn = document.getElementById('rotate-overlay'); // 追加
 
 let overlayScale = 1;
 let overlayStartDistance = 0;
@@ -15,6 +16,9 @@ let overlayX = 0;
 let overlayY = 0;
 let isDragging = false;
 let startX, startY;
+
+let currentOverlayIndex = 0; // 追加
+const overlays = ['images/default-overlay.png', 'images/default-overlay1.png']; // 追加
 
 // カメラの初期化
 const constraints = {
@@ -153,4 +157,10 @@ function getDistance(touch1, touch2) {
 // タブを閉じる
 closeTabBtn.addEventListener('click', () => {
   window.close();
+});
+
+// オーバーレイ画像を切り替える（追加）
+rotateOverlayBtn.addEventListener('click', () => {
+  currentOverlayIndex = (currentOverlayIndex + 1) % overlays.length;
+  overlayImage.src = overlays[currentOverlayIndex];
 });
