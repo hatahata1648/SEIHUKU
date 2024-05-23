@@ -159,8 +159,9 @@ body, html {
 
 #erumin {
   position: absolute;
-  bottom: 20px;
-  left: 20px;
+  bottom: 140px;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 #setting {
@@ -171,7 +172,7 @@ body, html {
 
 #rotate {
   position: absolute;
-  bottom: 20px;
+  bottom: 140px;
   right: 20px;
 }
 
