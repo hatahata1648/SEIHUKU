@@ -48,19 +48,34 @@ body, html {
 }
 
 #ui-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    pointer-events: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
 }
 
-#ui-overlay-image.resizeimage img {
-    width: 100%;
+#ui-overlay-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+#ui-overlay-image .resizeimage {
+  width: 100%;
+  height: 100%;
+}
+
+#ui-overlay-image .resizeimage img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 #capture-btn {
@@ -84,7 +99,7 @@ body, html {
   height: 60px;
   border-radius: 50%;
   background-color: white;
-  border: 4px solid black;
+  border: 4px solid white;
   box-sizing: border-box;
 }
 
