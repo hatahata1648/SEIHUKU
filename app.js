@@ -8,6 +8,10 @@ const closeBtn = document.getElementById('close-btn');
 const imageInput = document.getElementById('image-input');
 const shutterSound = document.getElementById('shutter-sound');
 const closeTabBtn = document.getElementById('close-tab');
+const rotateLink = document.getElementById('rotate-link');
+
+const overlays = ['images/default-overlay.png', 'images/default-overlay1.png'];
+let currentOverlayIndex = 0;
 
 let overlayScale = 1;
 let overlayStartDistance = 0;
@@ -36,7 +40,7 @@ captureBtn.addEventListener('click', () => {
   canvas.height = video.videoHeight;
   const ctx = canvas.getContext('2d');
   ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-  
+
   const videoRect = video.getBoundingClientRect();
   const overlayRect = overlayImage.getBoundingClientRect();
   const overlayWidthRatio = overlayRect.width / videoRect.width;
@@ -55,8 +59,6 @@ captureBtn.addEventListener('click', () => {
 
   const dataURL = canvas.toDataURL('image/png');
   capturedImage.src = dataURL;
-  capturedImage.style.width = '100%';
-  capturedImage.style.height = 'auto';
   previewContainer.style.display = 'flex';
   shutterSound.play();
 });
@@ -153,4 +155,11 @@ function getDistance(touch1, touch2) {
 // タブを閉じる
 closeTabBtn.addEventListener('click', () => {
   window.close();
+});
+
+// オーバーレイ画像を切り替える
+rotateLink.addEventListener('click', (event) => {
+  event.preventDefault(); // リンクの動作をキャンセル
+  currentOverlayIndex = (currentOverlayIndex + 1) % overlays.length;
+  overlayImage.src = overlays[currentOverlayIndex];
 });
