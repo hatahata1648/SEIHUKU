@@ -1,4 +1,4 @@
-onst video = document.getElementById('video');
+const video = document.getElementById('video');
 const canvas = document.getElementById('canvas');
 const overlayImage = document.getElementById('overlay-image');
 const captureBtn = document.getElementById('capture-btn');
@@ -154,4 +154,3 @@ function getDistance(touch1, touch2) {
 closeTabBtn.addEventListener('click', () => {
   window.close();
 });
-
