@@ -1,4 +1,4 @@
-const video = document.getElementById('video');
+onst video = document.getElementById('video');
 const canvas = document.getElementById('canvas');
 const overlayImage = document.getElementById('overlay-image');
 const captureBtn = document.getElementById('capture-btn');
@@ -8,7 +8,6 @@ const closeBtn = document.getElementById('close-btn');
 const imageInput = document.getElementById('image-input');
 const shutterSound = document.getElementById('shutter-sound');
 const closeTabBtn = document.getElementById('close-tab');
-const rotateOverlayBtn = document.getElementById('rotate-overlay');
 
 let overlayScale = 1;
 let overlayStartDistance = 0;
@@ -16,9 +15,6 @@ let overlayX = 0;
 let overlayY = 0;
 let isDragging = false;
 let startX, startY;
-
-let currentOverlayIndex = 0;
-const overlays = ['images/default-overlay.png', 'images/default-overlay1.png'];
 
 // カメラの初期化
 const constraints = {
@@ -159,8 +155,3 @@ closeTabBtn.addEventListener('click', () => {
   window.close();
 });
 
-// オーバーレイ画像を切り替える
-rotateOverlayBtn.addEventListener('click', () => {
-  currentOverlayIndex = (currentOverlayIndex + 1) % overlays.length;
-  overlayImage.src = overlays[currentOverlayIndex];
-});
