@@ -59,14 +59,22 @@ body, html {
   pointer-events: none;
 }
 
+#ui-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
 #ui-overlay.resizeimage {
   width: 100%;
   height: 100%;
 }
 
 #ui-overlay.resizeimage img {
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   object-fit: contain;
 }
 
@@ -91,7 +99,7 @@ body, html {
   height: 60px;
   border-radius: 50%;
   background-color: white;
-  border: 4px solid white;
+  border: 4px solid black;
   box-sizing: border-box;
 }
 
