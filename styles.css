@@ -48,16 +48,16 @@ body, html {
 }
 
 #ui-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  zoom: 1.5;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  pointer-events: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    zoom: 2;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none;
 }
 
 #ui-overlay-image {
