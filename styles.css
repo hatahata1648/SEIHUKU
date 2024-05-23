@@ -193,13 +193,13 @@ body, html {
   display:inline-block;
   background: transparent;
   color: #fff;
-  padding: 10px;
+  padding: 5px;
   outline: none;
 }
 
 .btnripple img {
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: auto;
 }
 
 .btnripple::after {
@@ -231,8 +231,8 @@ body, html {
   /*周囲の線の起点とするためrelativeを指定*/
   position: relative;
   /*円の形状*/
-  width:50px;
-  height:50px;
+  width:40px;
+  height:40px;
   box-sizing: border-box;
   padding: 5px;
   text-align: center;
@@ -285,12 +285,12 @@ body, html {
   color: #333;
   outline: none;
   background: transparent;
-  padding: 10px;
+  padding: 5px;
 }
 
 .btnripple3 img {
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: auto;
 }
 
 /*波形の設定*/
@@ -302,8 +302,8 @@ body, html {
   top:0;
   /*波形の形状*/
   border: 1px solid #fff;
-  width: 60px;
-  height: 60px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
   /*はじめは不透明*/
   opacity:1;
