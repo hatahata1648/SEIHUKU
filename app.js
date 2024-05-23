@@ -40,16 +40,12 @@ captureBtn.addEventListener('click', () => {
   const overlayRect = overlayImage.getBoundingClientRect();
   const overlayWidthRatio = overlayRect.width / videoRect.width;
   const overlayHeightRatio = overlayRect.height / videoRect.height;
-  const overlayLeftRatio = (overlayRect.left - videoRect.left) / videoRect.width;
-  const overlayTopRatio = (overlayRect.top - videoRect.top) / videoRect.height;
 
   const captureOverlayWidth = canvas.width * overlayWidthRatio;
   const captureOverlayHeight = canvas.height * overlayHeightRatio;
-  const captureOverlayLeft = canvas.width * overlayLeftRatio;
-  const captureOverlayTop = canvas.height * overlayTopRatio;
 
   if (overlayImage.src) {
-    ctx.drawImage(overlayImage, captureOverlayLeft, captureOverlayTop, captureOverlayWidth, captureOverlayHeight);
+    ctx.drawImage(overlayImage, 0, 0, captureOverlayWidth, captureOverlayHeight);
   }
 
   const dataURL = canvas.toDataURL('image/png');
@@ -148,3 +144,37 @@ function getDistance(touch1, touch2) {
   const y = touch1.clientY - touch2.clientY;
   return Math.sqrt(x * x + y * y);
 }
+
+// バツボタンのクリックイベント
+document.getElementById('batu').addEventListener('click', () => {
+  window.close();
+});
+
+// メニューボタンのクリックイベント
+document.getElementById('menu').addEventListener('click', () => {
+  window.close();
+});
+
+// エルミンボタンのクリックイベント
+document.getElementById('erumin').addEventListener('click', () => {
+  window.close();
+});
+
+// 設定ボタンのクリックイベント
+document.getElementById('setting').addEventListener('click', () => {
+  window.close();
+});
+
+// 回転ボタンのクリックイベント
+document.getElementById('rotate').addEventListener('click', () => {
+  // オーバーレイ画像の位置を初期化
+  overlayImage.style.transform = 'translate(0px, 0px) scale(1)';
+  overlayScale = 1;
+  overlayX = 0;
+  overlayY = 0;
+});
+
+// アンダーボタンのクリックイベント
+document.getElementById('under').addEventListener('click', () => {
+  window.close();
+});
