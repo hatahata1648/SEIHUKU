@@ -7,6 +7,7 @@ const capturedImage = document.getElementById('captured-image');
 const closeBtn = document.getElementById('close-btn');
 const imageInput = document.getElementById('image-input');
 const shutterSound = document.getElementById('shutter-sound');
+const closeTabBtn = document.getElementById('close-tab');
 
 let overlayScale = 1;
 let overlayStartDistance = 0;
@@ -148,3 +149,8 @@ function getDistance(touch1, touch2) {
   const y = touch1.clientY - touch2.clientY;
   return Math.sqrt(x * x + y * y);
 }
+
+// タブを閉じる
+closeTabBtn.addEventListener('click', () => {
+  window.close();
+});
