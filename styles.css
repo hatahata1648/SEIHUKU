@@ -47,23 +47,6 @@ body, html {
   max-height: 100%;
 }
 
-#ui-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  pointer-events: none;
-}
-
-#ui-overlay-image {
-  max-width: 100%;
-  max-height: 100%;
-}
-
 #capture-btn {
   position: absolute;
   bottom: 65px;
@@ -77,7 +60,6 @@ body, html {
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  pointer-events: auto;
 }
 
 #capture-btn-inner {
@@ -85,7 +67,7 @@ body, html {
   height: 60px;
   border-radius: 50%;
   background-color: white;
-  border: 4px solid black;
+  border: 4px solid white;
   box-sizing: border-box;
 }
 
@@ -158,6 +140,184 @@ body, html {
     opacity: 1;
   }
   100% {
+    opacity: 0;
+  }
+}
+
+#batu {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+}
+
+#menu {
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+#erumin {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+}
+
+#setting {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+#rotate {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+}
+
+#under {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* クリックしたら波紋が広がる */
+.btnripple{
+  /*波紋の基点とするためrelativeを指定*/
+  position: relative;
+  /*はみ出す波紋を隠す*/
+  overflow: hidden;
+  /*ボタンの形状*/
+  text-decoration: none;
+  display:inline-block;
+  background: transparent;
+  color: #fff;
+  padding: 10px;
+  outline: none;
+}
+
+.btnripple img {
+  width: 40px;
+  height: 40px;
+}
+
+.btnripple::after {
+  content: "";
+  /*絶対配置で波紋位置を決める*/
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  /*波紋の形状*/
+  background: radial-gradient(circle, #fff 10%, transparent 10%) no-repeat 50%;
+  transform: scale(10, 10);
+  /*はじめは透過0に*/
+  opacity: 0;
+  /*アニメーションの設定*/
+  transition: transform 0.3s, opacity 1s;
+}
+
+/*クリックされたあとの形状の設定*/
+.btnripple:active::after {
+  transform: scale(0, 0);
+  transition: 0s;
+  opacity: 0.3;
+}
+
+/* 押し込む円 */
+.pushcircle{
+  /*周囲の線の起点とするためrelativeを指定*/
+  position: relative;
+  /*円の形状*/
+  width:50px;
+  height:50px;
+  box-sizing: border-box;
+  padding: 5px;
+  text-align: center;
+  background: transparent;
+  border-radius:50%;
+  color: #fff;
+  text-decoration: none;
+  outline: none;
+  /*天地中央にテキストを配置*/
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pushcircle img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/*内側の線*/
+.pushcircle:after {
+  content: "";
+  /*絶対配置で線の位置を決める*/
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  /*線の形状*/
+  width: 85%;
+  height: 85%;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(1.1);
+  /*アニメーションの指定*/
+  transition: .3s ease; 
+}
+
+/*hoverをしたら枠線が小さくなる*/
+.pushcircle:active:after {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+/* 波紋がふわっと広がる */
+.btnripple3{
+  /*波紋の基点とするためrelativeを指定*/
+  position: relative;
+  /*リンクの形状*/
+  display:inline-block;
+  text-decoration: none;
+  color: #333;
+  outline: none;
+  background: transparent;
+  padding: 10px;
+}
+
+.btnripple3 img {
+  width: 50px;
+  height: 50px;
+}
+
+/*波形の設定*/
+.btnripple3:active::before {
+  content: '';
+  /*絶対配置で波形の位置を決める*/
+  position: absolute;
+  left:30%;
+  top:0;
+  /*波形の形状*/
+  border: 1px solid #fff;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  /*はじめは不透明*/
+  opacity:1;
+  /*アニメーションの設定*/
+  animation:1s circleanime2 forwards;
+}
+
+/*波形が広がるアニメーション*/
+@keyframes circleanime2{
+  0%{
+    transform: scale(0);
+  }
+  100%{
+    transform:scale(2);
     opacity: 0;
   }
 }
