@@ -59,22 +59,14 @@ body, html {
   pointer-events: none;
 }
 
-#ui-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
-
 #ui-overlay.resizeimage {
   width: 100%;
   height: 100%;
 }
 
 #ui-overlay.resizeimage img {
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   object-fit: contain;
 }
 
@@ -99,7 +91,7 @@ body, html {
   height: 60px;
   border-radius: 50%;
   background-color: white;
-  border: 4px solid black;
+  border: 4px solid white;
   box-sizing: border-box;
 }
 
@@ -218,4 +210,129 @@ body, html {
   100% {
     opacity: 0;
   }
+}
+
+/* 以下は提供されたCSS */
+* {
+  box-sizing: border-box;
+}
+body {
+  font-size: 14px;
+}
+.v26_4 {
+  width: 414px;
+  height: 736px;
+  background: rgba(255,255,255,1);
+  opacity: 1;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  overflow: hidden;
+}
+.v26_8 {
+  width: 414px;
+  height: 72px;
+  background: rgba(0,0,0,1);
+  opacity: 1;
+  position: absolute;
+  top: 664px;
+  left: 0px;
+  overflow: hidden;
+}
+.v26_7 {
+  width: 414px;
+  height: 52px;
+  background: rgba(0,0,0,1);
+  opacity: 1;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  overflow: hidden;
+}
+.v26_9 {
+  width: 81px;
+  color: rgba(255,255,255,1);
+  position: absolute;
+  top: 696px;
+  left: 169px;
+  font-family: Josefin Sans;
+  font-weight: Regular;
+  font-size: 14px;
+  opacity: 1;
+  text-align: left;
+}
+.v26_22 {
+  width: 27px;
+  color: rgba(107,107,107,1);
+  position: absolute;
+  top: 696px;
+  left: 277px;
+  font-family: Josefin Sans;
+  font-weight: Regular;
+  font-size: 14px;
+  opacity: 1;
+  text-align: left;
+}
+.v26_23 {
+  width: 35px;
+  color: rgba(107,107,107,1);
+  position: absolute;
+  top: 696px;
+  left: 111px;
+  font-family: Josefin Sans;
+  font-weight: Regular;
+  font-size: 14px;
+  opacity: 1;
+  text-align: left;
+}
+.v26_24 {
+  width: 118px;
+  height: 8px;
+  background: rgba(182,182,182,1);
+  opacity: 1;
+  position: absolute;
+  top: 719px;
+  left: 148px;
+  border-top-left-radius: 7px;
+  border-top-right-radius: 7px;
+  border-bottom-left-radius: 7px;
+  border-bottom-right-radius: 7px;
+  overflow: hidden;
+}
+.v26_28 {
+  width: 38px;
+  color: rgba(255,255,255,1);
+  position: absolute;
+  top: 236px;
+  left: 12px;
+  font-family: Mohave;
+  font-weight: Medium;
+  opacity: 1;
+  text-align: left;
+}
+.v28_2 {
+  width: 34px;
+  height: 34px;
+  background: url("../images/v28_2.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  opacity: 1;
+  position: absolute;
+  top: 9px;
+  left: 190px;
+  overflow: hidden;
+}
+.v28_3 {
+  width: 28px;
+  height: 28px;
+  background: url("../images/v28_3.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  opacity: 1;
+  position: absolute;
+  top: 12px;
+  left: 375px;
+  overflow: hidden;
 }
