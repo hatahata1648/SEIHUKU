@@ -59,23 +59,10 @@ body, html {
   pointer-events: none;
 }
 
-#ui-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
+#ui-overlay img {
   width: 100%;
   height: 100%;
-}
-
-#ui-overlay.resizeimage {
-  width: 100%;
-  height: 100%;
-}
-
-#ui-overlay.resizeimage img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
+  object-fit: cover;
 }
 
 #capture-btn {
