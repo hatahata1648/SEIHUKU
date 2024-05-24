@@ -10,7 +10,7 @@ const shutterSound = document.getElementById('shutter-sound');
 const closeTabBtn = document.getElementById('close-tab');
 const rotateLink = document.getElementById('rotate-link');
 
-const overlays = ['images/default-overlay.png', 'images/default-overlay1.png'];
+const overlays = ['images/default-overlay.png', 'images/default-overlay1.png', 'images/default-overlay2.png'];
 let currentOverlayIndex = 0;
 
 let overlayScale = 1;
